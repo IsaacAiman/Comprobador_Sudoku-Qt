@@ -17,6 +17,10 @@
 #include <QLabel>
 #include <QTime>
 #include <QPushButton>
+#include <QMenuBar>
+#include <QMenu>
+#include <QToolBar>
+#include <QAction>
 
 namespace Ui {
 class SecondWindow;
@@ -32,6 +36,10 @@ public:
 
 private:
     //QFont               *fuente;
+    QAction             *actOpciones_;
+    QToolBar            *toolBar_;
+    QMenuBar            *menu_bar_;
+    QMenu               *menu_opciones;
     QTime               *startTime_;
     QTimer              *chrono_timer_;
     QLabel              *chrono_label_;
@@ -40,7 +48,6 @@ private:
     QFrame              *linea;
     QWidget             *wgtMain_;
     Ui::SecondWindow    *ui;
-    QMenuBar*           menu_;
     QGridLayout*        lytMain_;
     QSlider*            volumeSlider_;
     QVector<QLineEdit*> vector;

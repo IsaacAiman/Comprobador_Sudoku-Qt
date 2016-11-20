@@ -19,6 +19,22 @@ SecondWindow::SecondWindow(QWidget *parent) :
     this->setMaximumSize(500,500);
     //wgtMain_->setMinimumSize(500,500);
 
+
+    //toolBar_ = new QToolBar;
+
+    menu_bar_ = new QMenuBar(this);
+    //menu_opciones = new QMenu;
+    this->setMenuBar(menu_bar_);
+
+    menu_opciones = new QMenu(tr("&Menu"), this);
+    menu_bar_->addMenu(menu_opciones);
+    menu_opciones = new QMenu(tr("&Measdas"), this);
+    menu_bar_->addMenu(menu_opciones);
+
+
+   // toolBar_=addToolBar(tr("Edit"));
+
+
     createBoard();
     iniciar_cronometro();
 
