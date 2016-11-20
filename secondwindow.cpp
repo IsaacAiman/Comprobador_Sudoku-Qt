@@ -20,6 +20,14 @@ SecondWindow::SecondWindow(QWidget *parent) :
     //wgtMain_->setMinimumSize(500,500);
 
     createBoard();
+    iniciar_cronometro();
+
+    connect(chrono_timer_, SIGNAL(timeout()), this, SLOT(updateTime()));
+    /*connect(chrono_start_, SIGNAL(clicked(bool)), this, SLOT(start()));
+    connect(chrono_stop_, SIGNAL(clicked(bool)), chrono_timer_, SLOT(stop()));*/
+
+
+
 
 }
 
@@ -85,4 +93,39 @@ void SecondWindow::createBoard(){
             column = 0;
         }
     }
+
+    //Label del chronometro
+     lytMain_->addWidget(chrono_label_ = new QLabel(this), 12,0,5,5);
+    //label de Salir
+    //label de mostrar solución
+    //label de comprobar
+
 }
+
+void SecondWindow::iniciar_cronometro(){
+
+    chrono_timer_=new QTimer;
+    startTime_ = new QTime;
+
+
+
+    chrono_label_->setText(QTime(0, 0).toString());
+   // lytMain_->addWidget(chrono_start_ = new QPushButton("start", this), 5,12,5,5);
+   // lytMain_->addWidget(chrono_stop_ = new QPushButton("stop", this),   6,12,5,5);
+
+    QFont fuente;
+    fuente.setPointSizeF(10);
+    chrono_label_->setFont(fuente);
+
+    startTime_->start();
+    chrono_timer_->start(1000);
+
+
+}
+
+void SecondWindow::updateTime(){
+
+    chrono_label_->setText(QTime(0, 0).addMSecs(startTime_->elapsed()).toString());
+
+}
+

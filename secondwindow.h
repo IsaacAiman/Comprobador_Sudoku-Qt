@@ -12,6 +12,11 @@
 #include <QLine>
 #include <QFrame>
 #include <QFont>
+#include <QElapsedTimer>
+#include <QTimer>
+#include <QLabel>
+#include <QTime>
+#include <QPushButton>
 
 namespace Ui {
 class SecondWindow;
@@ -26,7 +31,12 @@ public:
     ~SecondWindow();
 
 private:
-  // QFont               *fuente;
+    //QFont               *fuente;
+    QTime               *startTime_;
+    QTimer              *chrono_timer_;
+    QLabel              *chrono_label_;
+    QPushButton         *chrono_start_;
+    QPushButton         *chrono_stop_;
     QFrame              *linea;
     QWidget             *wgtMain_;
     Ui::SecondWindow    *ui;
@@ -35,6 +45,12 @@ private:
     QSlider*            volumeSlider_;
     QVector<QLineEdit*> vector;
     void createBoard();
+    void iniciar_cronometro();
+private slots:
+
+    void updateTime();
+    //void start();
+
 };
 
 #endif // SECONDWINDOW_H
