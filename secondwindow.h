@@ -11,6 +11,7 @@
 #include <QWidget>
 #include <QLine>
 #include <QFrame>
+#include <QFont>
 
 namespace Ui {
 class SecondWindow;
@@ -25,6 +26,8 @@ public:
     ~SecondWindow();
 
 private:
+  // QFont               *fuente;
+    QFrame              *linea;
     QWidget             *wgtMain_;
     Ui::SecondWindow    *ui;
     QMenuBar*           menu_;
