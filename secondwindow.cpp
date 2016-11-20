@@ -32,6 +32,8 @@ void SecondWindow::createBoard(){
 
     for (int i = 0; i<81; i++){
         QLineEdit *p = new QLineEdit();
+        p->setMaxLength(1);
+        p->setAlignment(Qt::AlignHCenter);
         vector.push_back(p);
     }
 
@@ -69,7 +71,6 @@ void SecondWindow::createBoard(){
             column ++;
             for (int j = 0; j<11; j++){
                 QLineEdit *p = new QLineEdit();
-                //p->setFont(fuente);
                 if (row!=3){
                     lytMain_->addWidget(vector[k], i,j,1,1);
                     k++;
