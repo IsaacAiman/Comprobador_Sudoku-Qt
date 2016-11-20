@@ -15,8 +15,8 @@ SecondWindow::SecondWindow(QWidget *parent) :
     fuente.setPointSizeF(20);
     //wgtMain_->setFixedSize();
     wgtMain_->setFont(fuente);
-    wgtMain_->setMaximumSize(500,400);
-    this->setMaximumSize(500,400);
+    wgtMain_->setMaximumSize(500,500);
+    this->setMaximumSize(500,500);
     //wgtMain_->setMinimumSize(500,500);
 
     createBoard();
@@ -52,28 +52,28 @@ void SecondWindow::createBoard(){
     linea = new QFrame;
     linea->setFrameShape(QFrame::VLine);
     linea->setLineWidth(15);
-    lytMain_->addWidget(linea, 0,3,11,1);
+    lytMain_->addWidget(linea, 2,3,11,1);
 
     linea = new QFrame;
     linea->setFrameShape(QFrame::VLine);
     linea->setLineWidth(15);
-    lytMain_->addWidget(linea, 0,7,11,1);
+    lytMain_->addWidget(linea, 2,7,11,1);
 
     linea = new QFrame;
     linea->setFrameShape(QFrame::HLine);
     linea->setLineWidth(15);
-    lytMain_->addWidget(linea, 3,0,1,11);
+    lytMain_->addWidget(linea, 5,0,1,11);
 
     linea = new QFrame;
     linea->setFrameShape(QFrame::HLine);
     linea->setLineWidth(15);
-    lytMain_->addWidget(linea, 7,0,1,11);
+    lytMain_->addWidget(linea, 9,0,1,11);
 
     //int f = 30;
 
 
 
-    for (int i = 0; i<11; i++){
+    for (int i = 2; i<13; i++){
         row = 0;
         if (column !=3){
             column ++;
@@ -95,7 +95,13 @@ void SecondWindow::createBoard(){
     }
 
     //Label del chronometro
-     lytMain_->addWidget(chrono_label_ = new QLabel(this), 12,0,5,5);
+     QLabel *sudoku_label = new QLabel("Sudoku");
+     sudoku_label->setAlignment(Qt::AlignCenter);
+
+
+    lytMain_->addWidget(chrono_label_ = new QLabel(this), 1,0,1,0);
+    lytMain_->addWidget(sudoku_label, 0,0,1,0);
+    chrono_label_->setAlignment(Qt::AlignCenter);
     //label de Salir
     //label de mostrar solución
     //label de comprobar
