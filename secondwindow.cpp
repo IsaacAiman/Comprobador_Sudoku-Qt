@@ -210,7 +210,6 @@ bool SecondWindow::checker(){
 //Comprobación cuadrados internos.
 
     set_.clear();
-    qDebug() << "cuadraditos";
 
     for (int k = 0; k<=6; k+=3){ // recorre filas de cuadrados
         for (int m = 0; m<=6; m+=3){ //recorre columnas de cuadrados
