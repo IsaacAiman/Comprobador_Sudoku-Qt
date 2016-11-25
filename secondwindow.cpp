@@ -18,7 +18,6 @@ SecondWindow::SecondWindow(QWidget *parent) :
     wgtMain_->setFont(fuente);
     wgtMain_->setMaximumSize(500,500);
     this->setMaximumSize(500,500);
-    //wgtMain_->setMinimumSize(500,500);
 
 
     //toolBar_ = new QToolBar;
@@ -49,7 +48,6 @@ SecondWindow::SecondWindow(QWidget *parent) :
 
     //vector[5]->setReadOnly(true);
 
-
 }
 
 SecondWindow::~SecondWindow()
@@ -61,6 +59,7 @@ void SecondWindow::createBoard(){
 
     for (int i = 0; i<81; i++){
         QLineEdit *p = new QLineEdit();
+        p->setStyleSheet("font-size: 30px; background-color: #91C2FF;");
         p->setMaxLength(1);
         p->setAlignment(Qt::AlignHCenter);
         vector.push_back(p);

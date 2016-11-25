@@ -9,6 +9,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     connect(ui->salir_, SIGNAL(clicked(bool)), QApplication::instance(), SLOT(quit()));
     connect(ui->continuar_, SIGNAL(clicked(bool)), this, SLOT(secondwindow()));
+
 }
 
 MainWindow::~MainWindow()
