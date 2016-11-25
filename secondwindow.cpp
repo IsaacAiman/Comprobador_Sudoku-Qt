@@ -1,6 +1,7 @@
 #include "secondwindow.h"
 #include "ui_secondwindow.h"
 #include <QDebug>
+#include <QSet>
 
 SecondWindow::SecondWindow(QWidget *parent) :
     QMainWindow(parent)
@@ -26,9 +27,11 @@ SecondWindow::SecondWindow(QWidget *parent) :
     //menu_opciones = new QMenu;
     this->setMenuBar(menu_bar_);
 
+
     menu_opciones = new QMenu(tr("&Menu"), this);
     menu_bar_->addMenu(menu_opciones);
-    menu_opciones = new QMenu(tr("&Measdas"), this);
+    act_comprobar_sol = new QAction(tr("&Comrobar solución"), this);
+    menu_opciones->addAction(act_comprobar_sol);
     menu_bar_->addMenu(menu_opciones);
 
 
@@ -39,10 +42,11 @@ SecondWindow::SecondWindow(QWidget *parent) :
     iniciar_cronometro();
 
     connect(chrono_timer_, SIGNAL(timeout()), this, SLOT(updateTime()));
+    connect(act_comprobar_sol, SIGNAL(triggered(bool)), this, SLOT(comprobacion()));
     /*connect(chrono_start_, SIGNAL(clicked(bool)), this, SLOT(start()));
     connect(chrono_stop_, SIGNAL(clicked(bool)), chrono_timer_, SLOT(stop()));*/
 
-
+    //vector[5]->setReadOnly(true);
 
 
 }
@@ -111,7 +115,7 @@ void SecondWindow::createBoard(){
     }
 
     //Label del chronometro
-     QLabel *sudoku_label = new QLabel("Sudoku");
+     QLabel *sudoku_label = new QLabel("Comprobador de Sudoku");
      sudoku_label->setAlignment(Qt::AlignCenter);
 
 
@@ -142,7 +146,6 @@ void SecondWindow::iniciar_cronometro(){
     startTime_->start();
     chrono_timer_->start(1000);
 
-
 }
 
 void SecondWindow::updateTime(){
@@ -151,3 +154,76 @@ void SecondWindow::updateTime(){
 
 }
 
+int SecondWindow::get_pos(int x, int y){
+
+    return x*9+y;
+
+}
+void SecondWindow::comprobacion(){
+
+    if (checker())
+        qDebug() << "correcto";
+    else
+        qDebug() << "False";
+
+}
+
+bool SecondWindow::checker(){
+    bool sol = false;
+
+//comprobar que no se repiten números por fila.
+    QSet<int> set_;
+
+    for (int i = 0; i <9; i++){
+        for (int j = 0; j<9; j++){
+            if (vector[get_pos(i,j)]->text().toInt() < 10 && vector[get_pos(i,j)]->text().toInt() > 0){ //nos asguramos de que sean números del 1 al 9.
+                set_.insert(vector[get_pos(i,j)]->text().toInt());
+            }
+        }
+        if (set_.size()!=9){
+            return false;
+        }
+
+        set_.clear();
+
+    }
+
+//Comprobación de columnas
+    set_.clear();
+    for (int i = 0; i <9; i++){
+        for (int j = 0; j<9; j++){
+            //evitamos comprobar si son numeros del 0-9 porque ya lo hicimos para las filas;
+            set_.insert(vector[get_pos(j,i)]->text().toInt());
+
+        }
+        if (set_.size()!=9){
+            return false;
+        }
+
+        set_.clear();
+
+    }
+
+//Comprobación cuadrados internos.
+
+    set_.clear();
+    qDebug() << "cuadraditos";
+
+    for (int k = 0; k<=6; k+=3){ // recorre filas de cuadrados
+        for (int m = 0; m<=6; m+=3){ //recorre columnas de cuadrados
+            for (int i = m; i<m+3; i++){//filas
+                for (int j = k; j<k+3; j++){//columnas
+                    set_.insert(vector[get_pos(i,j)]->text().toInt());
+                }
+            }
+            if (set_.size()!=9){
+                return false;
+            }
+            set_.clear();
+        }
+
+    }
+
+
+    return true;
+}

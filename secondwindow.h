@@ -21,6 +21,7 @@
 #include <QMenu>
 #include <QToolBar>
 #include <QAction>
+#include <QString>
 
 namespace Ui {
 class SecondWindow;
@@ -33,6 +34,7 @@ class SecondWindow : public QMainWindow
 public:
     explicit SecondWindow(QWidget *parent = 0);
     ~SecondWindow();
+    int get_pos(int x, int y);
 
 private:
     //QFont               *fuente;
@@ -40,6 +42,7 @@ private:
     QToolBar            *toolBar_;
     QMenuBar            *menu_bar_;
     QMenu               *menu_opciones;
+    QAction             *act_comprobar_sol;
     QTime               *startTime_;
     QTimer              *chrono_timer_;
     QLabel              *chrono_label_;
@@ -53,9 +56,11 @@ private:
     QVector<QLineEdit*> vector;
     void createBoard();
     void iniciar_cronometro();
+    bool checker();
 private slots:
 
     void updateTime();
+    void comprobacion ();
     //void start();
 
 };
