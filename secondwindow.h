@@ -22,6 +22,7 @@
 #include <QToolBar>
 #include <QAction>
 #include <QString>
+#include <QMessageBox>
 
 namespace Ui {
 class SecondWindow;

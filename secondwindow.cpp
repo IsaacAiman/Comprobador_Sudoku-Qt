@@ -161,10 +161,17 @@ int SecondWindow::get_pos(int x, int y){
 }
 void SecondWindow::comprobacion(){
 
-    if (checker())
-        qDebug() << "correcto";
-    else
-        qDebug() << "False";
+    if (checker()){
+        QMessageBox msgBox;
+        msgBox.setText("¡Enhorabuena! Solución correta.");
+        msgBox.exec();
+
+    }
+    else{
+        QMessageBox msgBox;
+        msgBox.setText("Solución incorrecta, vuelve a intentarlo.");
+        msgBox.exec();
+    }
 
 }
 
