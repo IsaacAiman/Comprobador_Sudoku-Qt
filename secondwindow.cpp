@@ -32,10 +32,11 @@ SecondWindow::SecondWindow(QWidget *parent) :
     menu_bar_->addMenu(menu_opciones);
     act_comprobar_sol = new QAction(tr("&Comrobar solución"), this);
     menu_opciones->addAction(act_comprobar_sol);
+    actLimpiar_ = new QAction(tr("&Limpiar tablero"), this);
+    menu_opciones->addAction(actLimpiar_);
     menu_bar_->addMenu(menu_opciones);
 
 
-   // toolBar_=addToolBar(tr("Edit"));
 
 
     createBoard();
@@ -43,8 +44,8 @@ SecondWindow::SecondWindow(QWidget *parent) :
 
     connect(chrono_timer_, SIGNAL(timeout()), this, SLOT(updateTime()));
     connect(act_comprobar_sol, SIGNAL(triggered(bool)), this, SLOT(comprobacion()));
-    /*connect(chrono_start_, SIGNAL(clicked(bool)), this, SLOT(start()));
-    connect(chrono_stop_, SIGNAL(clicked(bool)), chrono_timer_, SLOT(stop()));*/
+    connect(actLimpiar_, SIGNAL(triggered(bool)), this, SLOT(limpiar()));
+
 
     //vector[5]->setReadOnly(true);
 
@@ -89,16 +90,12 @@ void SecondWindow::createBoard(){
     linea->setLineWidth(15);
     lytMain_->addWidget(linea, 9,0,1,11);
 
-    //int f = 30;
-
-
 
     for (int i = 2; i<13; i++){
         row = 0;
         if (column !=3){
             column ++;
             for (int j = 0; j<11; j++){
-                QLineEdit *p = new QLineEdit();
                 if (row!=3){
                     lytMain_->addWidget(vector[k], i,j,1,1);
                     k++;
@@ -176,7 +173,6 @@ void SecondWindow::comprobacion(){
 }
 
 bool SecondWindow::checker(){
-    bool sol = false;
 
 //comprobar que no se repiten números por fila.
     QSet<int> set_;
@@ -231,6 +227,11 @@ bool SecondWindow::checker(){
 
     }
 
-
     return true;
+}
+
+void SecondWindow::limpiar(){
+    for (int i = 0; i<81; i++){
+     vector[i]->clear();
+    }
 }

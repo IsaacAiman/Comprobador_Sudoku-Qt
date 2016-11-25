@@ -38,8 +38,8 @@ public:
     int get_pos(int x, int y);
 
 private:
-    //QFont               *fuente;
-    QAction             *actOpciones_;
+
+    QAction             *actLimpiar_;
     QToolBar            *toolBar_;
     QMenuBar            *menu_bar_;
     QMenu               *menu_opciones;
@@ -62,7 +62,7 @@ private slots:
 
     void updateTime();
     void comprobacion ();
-    //void start();
+    void limpiar();
 
 };
 
