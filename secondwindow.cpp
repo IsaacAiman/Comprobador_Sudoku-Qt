@@ -137,7 +137,7 @@ bool SecondWindow::check_row(int pos){
     QSet<int> set_;
 
     int start_pos = row*9;
-    int end_pos = start_pos+8;
+    int end_pos = start_pos+9;
 
     for (int i = start_pos; i<end_pos; i++){
         if (vector[i]->text().toInt()>0 && vector[i]->text().toInt()<=9){
