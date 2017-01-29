@@ -43,7 +43,7 @@ SecondWindow::SecondWindow(QWidget *parent) :
 
     connect(chrono_timer_, SIGNAL(timeout()), this, SLOT(updateTime()));
     connect(act_comprobar_sol, SIGNAL(triggered(bool)), this, SLOT(comprobacion()));
-    connect(actLimpiar_, SIGNAL(triggered(bool)), this, SLOT(limpiar()));
+    connect(actLimpiar_, SIGNAL(triggered(bool)), this, SLOT(clear_board()));
 
 
     //vector[5]->setReadOnly(true);
@@ -122,6 +122,47 @@ void SecondWindow::createBoard(){
     //label de mostrar solución
     //label de comprobar
 
+    //QString p = p.number(5);
+
+}
+
+void SecondWindow::create_sudoku(){
+
+
+}
+
+bool SecondWindow::check_row(int pos){
+
+    int row = pos/9;
+    QSet<int> set_;
+
+    int start_pos = row*9;
+    int end_pos = start_pos+8;
+
+    for (int i = start_pos; i<end_pos; i++){
+        if (vector[i]->text().toInt()>0 && vector[i]->text().toInt()<=9){
+            if(!set_.contains(vector[i]->text().toInt())){
+                set_.insert(vector[i]->text().toInt());
+            }
+            else {
+                return false;
+            }
+        }
+    }
+
+    return true;
+
+}
+
+bool SecondWindow::check_col(int pos){
+
+    int col = pos - 9*(pos/9);
+    qDebug() << col;
+
+}
+
+bool SecondWindow::check_area(int pos){
+
 }
 
 void SecondWindow::iniciar_cronometro(){
@@ -155,6 +196,7 @@ int SecondWindow::get_pos(int x, int y){
     return x*9+y;
 
 }
+
 void SecondWindow::comprobacion(){
 
     if (checker()){
@@ -228,8 +270,20 @@ bool SecondWindow::checker(){
     return true;
 }
 
-void SecondWindow::limpiar(){
+void SecondWindow::clear_board(){
+
+    if (check_row(1)){
+        qDebug() << "No hay números repetidos en la fila";
+    }
+    else{
+
+        qDebug() << "Hay números repetidos en la fila";
+    }
+
     for (int i = 0; i<81; i++){
      vector[i]->clear();
     }
+    check_row(9);
+    check_col(10);
 }
+

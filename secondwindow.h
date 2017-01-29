@@ -57,12 +57,16 @@ private:
     QVector<QLineEdit*> vector;
     void createBoard();
     void iniciar_cronometro();
-    bool checker();
+    bool checker(); //checks if the solution is right or wrong.
+    void create_sudoku();
+    bool check_row(int pos); //checks that no number repeats in the row of the given position.
+    bool check_col(int pos); //checks that no number repeats in the column of the given position.
+    bool check_area(int pos); //checks that no number repeats in the area of the given position.
 private slots:
 
     void updateTime();
     void comprobacion ();
-    void limpiar();
+    void clear_board();
 
 };
 
